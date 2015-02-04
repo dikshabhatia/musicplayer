@@ -43,18 +43,16 @@ public class SongPlayingFragment extends Fragment {
     @InjectView(R.id.iv_song_image)
     ImageView iv_song_image;
 
-    public final static String TAG ="SongPlayingFragment";
+    public final static String TAG = "SongPlayingFragment";
 
     private MediaPlayer mediaPlayer;
     private double startTime = 0;
     private double finalTime = 0;
-    private Handler myHandler = new Handler();;
+    private Handler myHandler = new Handler();
+    ;
     private int forwardTime = 5000;
     private int backwardTime = 5000;
     public static int ONE_TIME_ONLY = 0;
-
-
-
 
 
     public static SongPlayingFragment newInstance(String param1, String param2) {
@@ -84,17 +82,15 @@ public class SongPlayingFragment extends Fragment {
         ButterKnife.inject(this, rootView);
 
 
-        if(ib_forward==null)
-        {
+        if (ib_forward == null) {
             Log.i(TAG, "forward button is null");
-        }
-        else {
+        } else {
             Log.i(TAG, "forward button is not null");
         }
 
         tv_song_name.setText("mysong.mp3");
         //Convenience method to create a MediaPlayer for a given resource id.
-        mediaPlayer = MediaPlayer.create(getActivity(),R.raw.mysong);
+        mediaPlayer = MediaPlayer.create(getActivity(), R.raw.mysong);
         seekBar.setClickable(false);
         ib_pause.setEnabled(false);
 
@@ -111,17 +107,29 @@ public class SongPlayingFragment extends Fragment {
             }
         });
 
+        ib_forward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                forward(rootView);
+            }
+        });
+        /*ib_rewind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rewind(rootView);
+            }
+        });*/
+
         return rootView;
     }
 
 
-    public void play(View view)
-    {
+    public void play(View view) {
         Toast.makeText(getActivity(), "Playing sound", Toast.LENGTH_SHORT).show();
         mediaPlayer.start();
         finalTime = mediaPlayer.getDuration();
         startTime = mediaPlayer.getCurrentPosition();
-        if(ONE_TIME_ONLY == 0){
+        if (ONE_TIME_ONLY == 0) {
             seekBar.setMax((int) finalTime);
             ONE_TIME_ONLY = 1;
         }
@@ -138,8 +146,8 @@ public class SongPlayingFragment extends Fragment {
                                 TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.
                                         toMinutes((long) startTime)))
         );
-        seekBar.setProgress((int)startTime);
-        myHandler.postDelayed(UpdateSongTime,100);
+        seekBar.setProgress((int) startTime);
+        myHandler.postDelayed(UpdateSongTime, 100);
         ib_pause.setEnabled(true);
         ib_play.setEnabled(false);
     }
@@ -153,12 +161,12 @@ public class SongPlayingFragment extends Fragment {
                                     TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.
                                             toMinutes((long) startTime)))
             );
-            seekBar.setProgress((int)startTime);
+            seekBar.setProgress((int) startTime);
             myHandler.postDelayed(this, 100);
         }
     };
 
-    public void pause(View view){
+    public void pause(View view) {
         Toast.makeText(getActivity(), "Pausing sound",
                 Toast.LENGTH_SHORT).show();
 
@@ -167,5 +175,33 @@ public class SongPlayingFragment extends Fragment {
         ib_play.setEnabled(true);
     }
 
+    public void forward(View view) {
+        int temp = (int) startTime;
+        if ((temp + forwardTime) <= finalTime) {
+            startTime = startTime + forwardTime;
+            mediaPlayer.seekTo((int) startTime);
+        } else {
+            Toast.makeText(getActivity(),
+                    "Cannot jump forward 5 seconds",
+                    Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
+
+/*
+    public void rewind(View view){
+        int temp = (int)startTime;
+        if((temp-backwardTime)>0){
+            startTime = startTime - backwardTime;
+            mediaPlayer.seekTo((int) startTime);
+        }
+        else{
+            Toast.makeText(getActivity(),
+                    "Cannot jump backward 5 seconds",
+                    Toast.LENGTH_SHORT).show();
+        }
+
+    }*/
 
 }
