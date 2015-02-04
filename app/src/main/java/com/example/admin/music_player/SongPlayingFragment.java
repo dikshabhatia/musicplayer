@@ -104,6 +104,12 @@ public class SongPlayingFragment extends Fragment {
                 play(rootView);
             }
         });
+        ib_pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pause(rootView);
+            }
+        });
 
         return rootView;
     }
@@ -151,6 +157,15 @@ public class SongPlayingFragment extends Fragment {
             myHandler.postDelayed(this, 100);
         }
     };
+
+    public void pause(View view){
+        Toast.makeText(getActivity(), "Pausing sound",
+                Toast.LENGTH_SHORT).show();
+
+        mediaPlayer.pause();
+        ib_pause.setEnabled(false);
+        ib_play.setEnabled(true);
+    }
 
 
 }
