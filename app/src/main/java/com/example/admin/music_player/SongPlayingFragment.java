@@ -113,12 +113,12 @@ public class SongPlayingFragment extends Fragment {
                 forward(rootView);
             }
         });
-        /*ib_rewind.setOnClickListener(new View.OnClickListener() {
+        ib_rewind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 rewind(rootView);
             }
-        });*/
+        });
 
         return rootView;
     }
@@ -189,7 +189,7 @@ public class SongPlayingFragment extends Fragment {
 
     }
 
-/*
+
     public void rewind(View view){
         int temp = (int)startTime;
         if((temp-backwardTime)>0){
@@ -202,6 +202,6 @@ public class SongPlayingFragment extends Fragment {
                     Toast.LENGTH_SHORT).show();
         }
 
-    }*/
+    }
 
 }
