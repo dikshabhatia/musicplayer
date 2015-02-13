@@ -1,6 +1,8 @@
 package com.example.admin.music_player;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -16,6 +19,7 @@ import android.widget.Toast;
 
 import java.util.concurrent.TimeUnit;
 
+import Utilities.SongsManager;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -42,6 +46,10 @@ public class SongPlayingFragment extends Fragment {
     SeekBar seekBar;
     @InjectView(R.id.iv_song_image)
     ImageView iv_song_image;
+    @InjectView(R.id.bt_select_song)
+    Button bt_select_song;
+    @InjectView(R.id.bt_check)
+    Button bt_check;
 
     public final static String TAG = "SongPlayingFragment";
 
@@ -117,6 +125,23 @@ public class SongPlayingFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 rewind(rootView);
+            }
+        });
+
+        bt_select_song.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction =fragmentManager.beginTransaction();
+                fragmentTransaction.replace(android.R.id.content, new PlayListFragment());
+                fragmentTransaction.commit();
+            }
+        });
+
+        bt_check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SongsManager sm = new SongsManager();
             }
         });
 

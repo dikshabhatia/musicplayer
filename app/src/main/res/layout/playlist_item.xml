@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="#000000"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/tv_song_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:padding="10dp"
+        android:layout_alignParentTop="true"
+        android:textColor="#FFFFFF"
+        android:text="song name"
+        android:color="#f3f3f3"/>
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_singer_name"
+        android:text="singer name "
+        android:layout_below="@+id/tv_song_title"
+        android:textColor="#FFFF11"
+        android:textSize="20dp"
+        android:layout_marginLeft="15dp"
+        android:textStyle="italic"/>
+
+        <ImageView
+            android:layout_marginRight="10dp"
+            android:id="@+id/iv_song_image"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:src="@android:drawable/presence_audio_busy"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            />
+
+</RelativeLayout>

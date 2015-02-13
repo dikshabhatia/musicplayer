@@ -86,11 +86,26 @@
     <ImageView
         android:id="@+id/iv_song_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/tv_now_playing"
         android:src="@drawable/ic_launcher" />
+    <Button
+        android:layout_width="wrap_content"
+        android:id="@+id/bt_select_song"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tv_song_name"
+        android:layout_marginLeft="45dp"
+        android:text="songs"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:id="@+id/bt_check"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_song_name"
+        android:layout_marginLeft="45dp"
+        android:text="check"/>
 
     <TextView
         android:id="@+id/tv_song_name"
