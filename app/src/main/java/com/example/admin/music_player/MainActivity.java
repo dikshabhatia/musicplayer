@@ -17,7 +17,7 @@ public class MainActivity extends ActionBarActivity {
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction =fragmentManager.beginTransaction();
-        fragmentTransaction.add(android.R.id.content, new SongPlayingFragment());
+        fragmentTransaction.add(android.R.id.content, new SongPlayingFragment()).addToBackStack("");
         fragmentTransaction.commit();
 
 

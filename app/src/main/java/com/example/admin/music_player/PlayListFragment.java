@@ -1,10 +1,13 @@
 package com.example.admin.music_player;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -40,25 +43,56 @@ public class PlayListFragment extends Fragment {
 
         // looping through playlist
         for (int i = 0; i < songsList.size(); i++) {
-        // creating new HashMap
-        HashMap<String, String> song = songsList.get(i);
+            // creating new HashMap
+            HashMap<String, String> song = songsList.get(i);
 
-        // adding HashList to ArrayList
-        songsListData.add(song);
+            // adding HashList to ArrayList
+            songsListData.add(song);
         }
 
-        // Adding menuItems to ListView
-        SongsAdapter adapter;
-        adapter = new SongsAdapter(this, songsListData,
-                R.layout.playlist_item, new String[] { "songTitle" }, new int[] {
-                R.id.tv_song_name });
-        listView=(ListView)rootView.findViewById(R.id.lv_songs);
+       listView =(ListView)rootView.findViewById(R.id.lv_songs);
+       SongsAdapter adapterObject= new SongsAdapter(getActivity(),songsList);
+       listView.setAdapter(adapterObject);
 
-        listView.setAdapter(adapter);
+        /*
+
+         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Bundle bundle=new Bundle();
+                bundle.putString("Name of item",listOfStudents.get(i).getName());
+
+                ItemFragment fragment = new ItemFragment();
+                fragment.setArguments(bundle);
+
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction =fragmentManager.beginTransaction();
+                fragmentTransaction.replace(android.R.id.content,fragment).commit();
+            }
+        });
+         */
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Bundle bundle = new Bundle();
+                bundle.putString("songPath",songsList.get(i).get("songPath"));
+
+                SongPlayingFragment fragment = new SongPlayingFragment();
+                fragment.setArguments(bundle);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(android.R.id.content,fragment).addToBackStack("").commit();
+
+
+            }
+        });
+
+
 
         return rootView;
     }
-
 
 
 
