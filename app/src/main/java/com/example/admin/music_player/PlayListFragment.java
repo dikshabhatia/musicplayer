@@ -54,30 +54,14 @@ public class PlayListFragment extends Fragment {
        SongsAdapter adapterObject= new SongsAdapter(getActivity(),songsList);
        listView.setAdapter(adapterObject);
 
-        /*
 
-         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                Bundle bundle=new Bundle();
-                bundle.putString("Name of item",listOfStudents.get(i).getName());
-
-                ItemFragment fragment = new ItemFragment();
-                fragment.setArguments(bundle);
-
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction =fragmentManager.beginTransaction();
-                fragmentTransaction.replace(android.R.id.content,fragment).commit();
-            }
-        });
-         */
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Bundle bundle = new Bundle();
-                bundle.putString("songPath",songsList.get(i).get("songPath"));
+                //bundle.putString("songPath",songsList.get(i).get("songPath"));
+
+                bundle.putInt("songIndex" , i);
 
                 SongPlayingFragment fragment = new SongPlayingFragment();
                 fragment.setArguments(bundle);

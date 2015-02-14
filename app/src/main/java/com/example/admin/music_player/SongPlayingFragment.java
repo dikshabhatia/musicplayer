@@ -98,7 +98,11 @@ public class SongPlayingFragment extends Fragment {
 
         tv_song_name.setText("mysong.mp3");
         //Convenience method to create a MediaPlayer for a given resource id.
-        mediaPlayer = MediaPlayer.create(getActivity(), R.raw.mysong);
+
+       // String songPath=getArguments().getString("songPath");
+            int songIndex = getArguments().getInt("songIndex");
+
+         mediaPlayer = MediaPlayer.create(getActivity(),songIndex);
         seekBar.setClickable(false);
         ib_pause.setEnabled(false);
 
