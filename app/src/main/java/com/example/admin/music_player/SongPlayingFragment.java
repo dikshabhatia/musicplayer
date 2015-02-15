@@ -83,7 +83,6 @@ public class SongPlayingFragment extends Fragment implements PlayListFragment.So
         SongPlayingFragment fragment = new SongPlayingFragment();
         Bundle args = new Bundle();
 
-
         return fragment;
     }
 
