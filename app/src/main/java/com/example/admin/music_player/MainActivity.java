@@ -17,7 +17,7 @@ public class MainActivity extends ActionBarActivity {
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction =fragmentManager.beginTransaction();
-        fragmentTransaction.add(android.R.id.content, new SongPlayingFragment()).addToBackStack("");
+        fragmentTransaction.add(android.R.id.content, new SongPlayingFragment(), "SPFRAG");
         fragmentTransaction.commit();
 
 
@@ -30,6 +30,7 @@ public class MainActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
 
 
 }

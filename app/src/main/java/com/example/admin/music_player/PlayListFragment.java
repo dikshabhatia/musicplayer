@@ -1,9 +1,8 @@
 package com.example.admin.music_player;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +18,13 @@ import Utilities.SongsManager;
 
 public class PlayListFragment extends Fragment {
 
-    ListView listView;
     public ArrayList<HashMap<String, String>> songsList = new ArrayList<HashMap<String, String>>();
+    SongSelectionListner songSelectionListner;
+    ListView listView;
 
+    public PlayListFragment(SongSelectionListner songSelectionListner){
+        this.songSelectionListner = songSelectionListner;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,8 +61,14 @@ public class PlayListFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Bundle bundle = new Bundle();
-                //bundle.putString("songPath",songsList.get(i).get("songPath"));
+
+                String songspath = songsList.get(i).get("songPath");
+                Log.d("sonsPath.. : ",songspath);
+
+                songSelectionListner.onSongSelected(songspath);
+                //getFragmentManager().popBackStack();
+                /*Bundle bundle = new Bundle();
+                ///bundle.putString("songPath",songsList.get(i).get("songPath"));
 
                 bundle.putInt("songIndex" , i);
 
@@ -68,7 +77,7 @@ public class PlayListFragment extends Fragment {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(android.R.id.content,fragment).addToBackStack("").commit();
-
+*/
 
             }
         });
@@ -78,6 +87,9 @@ public class PlayListFragment extends Fragment {
         return rootView;
     }
 
+        public interface SongSelectionListner {
 
+            public void onSongSelected(String songPath);
+        }
 
 }

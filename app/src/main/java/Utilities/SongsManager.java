@@ -15,20 +15,15 @@ import java.util.Set;
  */
 public class SongsManager {
 
-
+    public static final String MEDIA_PATH = new String("/sdcard/");
     int i;
+    private ArrayList<HashMap<String, String>> songsList = new ArrayList<HashMap<String, String>>();
+
 
     public SongsManager() {
 
         getPlayList();
     }
-
-    public static final String MEDIA_PATH = new String("/sdcard/");
-
-
-    private ArrayList<HashMap<String, String>> songsList = new ArrayList<HashMap<String, String>>();
-
-
 
     /**
      * Function to read all mp3 files from sdcard
